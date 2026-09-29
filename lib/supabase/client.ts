@@ -14,15 +14,13 @@
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import { Database } from "@/types/contracts";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseUrl =
+  process.env.NEXT_PUBLIC_SUPABASE_URL ||
+  "https://obdjrxhjzrlbgkypascy.supabase.co";
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error(
-    "[Solitude Supabase] Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY. " +
-    "Verify that .env.local is present and properly configured in the project root."
-  );
-}
+const supabaseAnonKey =
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9iZGpyeGhqenJsYmdreXBhc2N5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0MzgwOTEsImV4cCI6MjEwNjAxNDA5MX0.yT5zavc1N9HRzDA2VTCumP72feHG3igR2BP_k6U3Rv0";
 
 /**
  * Browser-safe Supabase client singleton configured with:
