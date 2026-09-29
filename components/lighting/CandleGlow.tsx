@@ -83,11 +83,12 @@ export const CandleGlow: React.FC<CandleGlowProps> = ({
       {showCandleGraphic && (
         <div
           onClick={onToggleLit}
-          className={`absolute bottom-24 right-3 sm:bottom-6 sm:right-8 scale-75 sm:scale-100 origin-bottom-right pointer-events-auto cursor-pointer group flex flex-col items-center select-none transition-transform duration-300 active:scale-95 ${
+          className={`hidden sm:block absolute bottom-6 right-8 origin-bottom-right pointer-events-auto cursor-pointer group select-none transition-transform duration-300 active:scale-95 ${
             isLit ? "opacity-100" : "opacity-40"
           }`}
           title={isLit ? "Extinguish candle" : "Light candle"}
         >
+          <div className="flex flex-col items-center">
           {/* Flame & Halos */}
           {isLit ? (
             <div className="relative flex items-center justify-center mb-1">
@@ -143,6 +144,7 @@ export const CandleGlow: React.FC<CandleGlowProps> = ({
 
           {/* Brass Base Holder */}
           <div className="w-10 h-1.5 bg-gradient-to-r from-amber-900 via-amber-700 to-amber-900 rounded-full shadow-md -mt-0.5 border border-amber-500/20" />
+          </div>
         </div>
       )}
     </div>

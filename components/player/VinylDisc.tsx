@@ -41,13 +41,13 @@ export const VinylDisc: React.FC<VinylDiscProps> = ({
 
   return (
     <div
-      className={`relative flex items-center justify-center select-none ${className}`}
+      className={`relative w-full h-[180px] xs:h-[200px] sm:h-[235px] md:h-[270px] flex items-center justify-center select-none ${className}`}
       style={{ perspective: 1000 }}
     >
       {/* -------------------------------------------------------------------- */}
-      {/* 1. TURNTABLE PLATTER BASE & ACOUSTIC SHADOW                          */}
+      {/* UNIFIED TURNTABLE PLATTER & TONEARM ASSEMBLY                        */}
       {/* -------------------------------------------------------------------- */}
-      <div className="relative flex items-center justify-center">
+      <div className="relative w-[270px] h-[270px] flex items-center justify-center scale-[0.65] xs:scale-[0.72] sm:scale-85 md:scale-100 origin-center transition-transform duration-300 shrink-0">
         {/* Deep ambient drop shadow under the platter */}
         <div
           className="absolute -inset-4 rounded-full bg-black/60 blur-2xl pointer-events-none transition-all duration-700"
@@ -55,11 +55,11 @@ export const VinylDisc: React.FC<VinylDiscProps> = ({
         />
 
         {/* ------------------------------------------------------------------ */}
-        {/* 2. ROTATING VINYL DISC                                             */}
+        {/* 1. ROTATING VINYL DISC                                             */}
         {/* ------------------------------------------------------------------ */}
         <div
           ref={vinylDiscRef}
-          className="relative w-[160px] h-[160px] min-[390px]:w-[185px] min-[390px]:h-[185px] sm:w-[220px] sm:h-[220px] md:w-[250px] md:h-[250px] lg:w-[270px] lg:h-[270px] rounded-full vinyl-grooves flex items-center justify-center shadow-2xl transition-transform duration-500 vinyl-spinning"
+          className="relative w-[260px] h-[260px] rounded-full vinyl-grooves flex items-center justify-center shadow-2xl transition-transform duration-500 vinyl-spinning"
           style={{
             animationPlayState: isPlaying ? "running" : "paused",
             willChange: "transform",
@@ -82,7 +82,7 @@ export const VinylDisc: React.FC<VinylDiscProps> = ({
           <div className="absolute inset-12 rounded-full border border-white/[0.04] pointer-events-none" />
 
           {/* Center Label (Album Artwork Container) */}
-          <div className="relative w-[64px] h-[64px] min-[390px]:w-[76px] min-[390px]:h-[76px] sm:w-[88px] sm:h-[88px] md:w-[100px] md:h-[100px] lg:w-[108px] lg:h-[108px] rounded-full overflow-hidden border-2 border-neutral-900 shadow-inner flex items-center justify-center bg-neutral-950">
+          <div className="relative w-[96px] h-[96px] rounded-full overflow-hidden border-2 border-neutral-900 shadow-inner flex items-center justify-center bg-neutral-950">
             {coverUrl && !hasImgError ? (
               <Image
                 src={coverUrl}
@@ -111,26 +111,26 @@ export const VinylDisc: React.FC<VinylDiscProps> = ({
         </div>
 
         {/* ------------------------------------------------------------------ */}
-        {/* 3. TACTILE HARDWARE TONEARM                                        */}
+        {/* 2. TACTILE HARDWARE TONEARM                                        */}
         {/* ------------------------------------------------------------------ */}
         <div
-          className="absolute -top-5 -right-5 min-[390px]:-top-6 min-[390px]:-right-6 sm:-top-8 sm:-right-8 w-20 min-[390px]:w-24 sm:w-28 md:w-30 h-36 min-[390px]:h-44 sm:h-52 md:h-56 pointer-events-none z-20 origin-top-right transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+          className="absolute -top-7 -right-7 w-28 h-52 pointer-events-none z-20 origin-top-right transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
           style={{
             transform: isPlaying ? "rotate(23deg)" : "rotate(0deg)",
           }}
           aria-hidden="true"
         >
           {/* Tonearm Base & Gimbal Bearing Mount */}
-          <div className="absolute top-2 right-2 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-b from-neutral-700 via-neutral-800 to-neutral-950 border border-white/15 shadow-xl flex items-center justify-center">
+          <div className="absolute top-2 right-2 w-8 h-8 rounded-full bg-gradient-to-b from-neutral-700 via-neutral-800 to-neutral-950 border border-white/15 shadow-xl flex items-center justify-center">
             {/* Gimbal Center Pin */}
-            <div className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-gradient-to-tr from-amber-600 to-amber-300 border border-amber-700 shadow-sm" />
+            <div className="w-3.5 h-3.5 rounded-full bg-gradient-to-tr from-amber-600 to-amber-300 border border-amber-700 shadow-sm" />
             {/* Cylindrical Counterweight */}
-            <div className="absolute -top-3 right-1 w-4 h-3.5 sm:w-5 sm:h-4 bg-gradient-to-r from-neutral-600 via-neutral-700 to-neutral-800 rounded-sm border border-neutral-500/30 shadow-md" />
+            <div className="absolute -top-3 right-1 w-5 h-4 bg-gradient-to-r from-neutral-600 via-neutral-700 to-neutral-800 rounded-sm border border-neutral-500/30 shadow-md" />
           </div>
 
           {/* Curved Metallic Tonearm Rod */}
           <svg
-            className="absolute top-5 right-4 sm:top-6 sm:right-5 w-18 min-[390px]:w-20 sm:w-24 h-30 min-[390px]:h-36 sm:h-44 overflow-visible"
+            className="absolute top-6 right-5 w-24 h-44 overflow-visible"
             viewBox="0 0 80 150"
             fill="none"
           >
@@ -161,7 +161,7 @@ export const VinylDisc: React.FC<VinylDiscProps> = ({
 
           {/* Cartridge & Headshell (Stylus Needle Housing) */}
           <div
-            className="absolute bottom-2 left-2 sm:bottom-3 sm:left-3 w-4 h-7 rounded-sm bg-gradient-to-b from-neutral-800 to-neutral-950 border border-amber-500/40 shadow-lg transform -rotate-12 flex flex-col items-center justify-between py-1"
+            className="absolute bottom-3 left-3 w-4 h-7 rounded-sm bg-gradient-to-b from-neutral-800 to-neutral-950 border border-amber-500/40 shadow-lg transform -rotate-12 flex flex-col items-center justify-between py-1"
           >
             {/* Headshell Amber Accent Stripe */}
             <div className="w-2.5 h-[2px] bg-amber-400/80 rounded-full" />

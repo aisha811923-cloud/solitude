@@ -145,10 +145,10 @@ export const WaveformVisualizer: React.FC<WaveformVisualizerProps> = ({
   }, [analyserNode, isPlaying, barCount, width, height]);
 
   return (
-    <div className={`flex items-center justify-center ${className}`}>
+    <div className={`w-full flex justify-center items-center mx-auto my-1 ${className}`}>
       <canvas
         ref={canvasRef}
-        className="pointer-events-none"
+        className="pointer-events-none block mx-auto"
         aria-hidden="true"
       />
     </div>

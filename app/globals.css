@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --breakpoint-xs: 390px;
+}
+
 @layer base {
   :root {
     --bg-midnight: #070B14;

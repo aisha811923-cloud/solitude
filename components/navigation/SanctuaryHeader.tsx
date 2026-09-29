@@ -44,7 +44,7 @@ export const SanctuaryHeader: React.FC<SanctuaryHeaderProps> = ({
       {/* TOP NAVIGATION BAR                                                   */}
       {/* -------------------------------------------------------------------- */}
       <header
-        className={`relative z-20 w-full px-4 sm:px-8 pt-4 sm:pt-5 flex items-center justify-between select-none ${className}`}
+        className={`relative z-20 w-full h-11 sm:h-12 md:h-auto px-0 sm:px-4 md:px-0 pt-0 sm:pt-1 md:pt-5 flex items-center justify-between select-none shrink-0 ${className}`}
         role="banner"
       >
         {/* Brand Wordmark */}
