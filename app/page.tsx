@@ -124,7 +124,7 @@ export default function SanctuaryPage() {
   );
 
   return (
-    <main className="relative w-screen h-dvh overflow-hidden flex flex-col justify-between select-none px-4 py-2 sm:py-4 md:px-8">
+    <main className="relative w-screen h-dvh overflow-hidden flex flex-col justify-between select-none px-4 py-1.5 sm:py-2 md:py-0 md:px-8">
       {/* -------------------------------------------------------------------- */}
       {/* LAYER 1: ATMOSPHERIC BACKGROUND WITH SUBTLE DRIFT                    */}
       {/* -------------------------------------------------------------------- */}
@@ -178,9 +178,9 @@ export default function SanctuaryPage() {
       {/* -------------------------------------------------------------------- */}
       {/* LAYER 5: CENTER STAGE (TURNTABLE, SHAYARI & VISUALIZER)              */}
       {/* -------------------------------------------------------------------- */}
-      <section className="relative z-20 flex-1 flex flex-col items-center justify-center min-h-0 py-1 gap-1.5 sm:gap-3 md:gap-4 my-auto">
+      <section className="relative z-20 flex-1 flex flex-col items-center justify-center min-h-0 md:min-h-fit py-1 gap-1.5 sm:gap-2 md:gap-0 my-auto">
         {/* Hardware Vinyl Turntable Platter */}
-        <div className="mb-0 sm:mb-1 md:mb-4 scale-75 min-[400px]:scale-90 sm:scale-90 md:scale-95 lg:scale-100 transition-transform origin-center">
+        <div className="mb-0 sm:mb-1 md:mb-2 lg:mb-4 scale-75 min-[400px]:scale-90 sm:scale-90 md:scale-95 lg:scale-100 transition-transform origin-center">
           <VinylDisc
             isPlaying={audio.isPlaying}
             coverUrl={audio.currentTrack.cover_url}
@@ -190,7 +190,7 @@ export default function SanctuaryPage() {
         </div>
 
         {/* Track Title & Artist Center Stage */}
-        <div className="text-center max-w-[280px] xs:max-w-[320px] sm:max-w-md mx-auto mb-0.5 sm:mb-1 md:mb-2">
+        <div className="text-center max-w-[280px] xs:max-w-[320px] sm:max-w-md mx-auto mb-0.5 sm:mb-1 md:mb-1.5">
           <h2 className="text-sm sm:text-base md:text-2xl font-medium md:font-bold tracking-tight text-white mb-0.5 sm:mb-1 drop-shadow-md truncate">
             {audio.currentTrack.title}
           </h2>
@@ -201,7 +201,7 @@ export default function SanctuaryPage() {
 
         {/* Introspective Urdu/Hindi Shayari Card */}
         {audio.currentTrack.shayari_quote && (
-          <div className="max-w-[340px] md:max-w-lg mx-auto px-3 py-1.5 sm:px-6 sm:py-2.5 rounded-2xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-sm text-center mb-0.5 sm:mb-1 md:mb-3 transition-all duration-500 shadow-sm">
+          <div className="max-w-[340px] md:max-w-lg mx-auto px-3 py-1.5 sm:px-6 sm:py-2.5 rounded-2xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-sm text-center mb-0.5 sm:mb-1 md:mb-2 transition-all duration-500 shadow-sm">
             <p className="font-serif italic text-xs sm:text-xs md:text-sm text-amber-200/90 tracking-wide leading-relaxed line-clamp-2 md:line-clamp-none">
               &ldquo;{audio.currentTrack.shayari_quote}&rdquo;
             </p>
@@ -209,7 +209,7 @@ export default function SanctuaryPage() {
         )}
 
         {/* Real-time Frequency Spectrum Equalizer */}
-        <div className="w-full flex justify-center items-center mx-auto my-1">
+        <div className="w-full flex justify-center items-center mx-auto my-1 md:my-1.5">
           <WaveformVisualizer
             analyserNode={audio.analyserNode}
             isPlaying={audio.isPlaying}
@@ -223,7 +223,7 @@ export default function SanctuaryPage() {
       {/* -------------------------------------------------------------------- */}
       {/* LAYER 6: BOTTOM MASTER TRANSPORT DECK & HUD                           */}
       {/* -------------------------------------------------------------------- */}
-      <footer className="relative z-30 w-full flex flex-col items-center pb-2 sm:pb-6 px-0 sm:px-4 shrink-0">
+      <footer className="relative z-20 w-full flex flex-col items-center pb-2 sm:pb-3 md:pb-4 px-0 sm:px-4 shrink-0">
         {/* Multi-Channel Ambient Soundboard Popover (Desktop / Tablet) */}
         <AmbientSoundboard
           isOpen={isSoundboardOpen}
@@ -236,7 +236,7 @@ export default function SanctuaryPage() {
         />
 
         {/* Tactile Keyboard Shortcuts HUD (Elevated above ScrubBar on Desktop) */}
-        <div className="mb-2 hidden sm:block">
+        <div className="mb-1.5 md:mb-2 hidden sm:block">
           <KeyboardShortcutsHud
             activeKeycode={activeKeycode}
             isQueueOpen={isQueueOpen}

@@ -41,13 +41,13 @@ export const VinylDisc: React.FC<VinylDiscProps> = ({
 
   return (
     <div
-      className={`relative w-full h-[180px] xs:h-[200px] sm:h-[235px] md:h-[270px] flex items-center justify-center select-none ${className}`}
+      className={`relative w-full h-[180px] xs:h-[200px] sm:h-[225px] md:h-[240px] lg:h-[260px] xl:h-[270px] flex items-center justify-center select-none ${className}`}
       style={{ perspective: 1000 }}
     >
       {/* -------------------------------------------------------------------- */}
       {/* UNIFIED TURNTABLE PLATTER & TONEARM ASSEMBLY                        */}
       {/* -------------------------------------------------------------------- */}
-      <div className="relative w-[270px] h-[270px] flex items-center justify-center scale-[0.65] xs:scale-[0.72] sm:scale-85 md:scale-100 origin-center transition-transform duration-300 shrink-0">
+      <div className="relative w-[270px] h-[270px] flex items-center justify-center scale-[0.65] xs:scale-[0.72] sm:scale-85 md:scale-[0.88] lg:scale-[0.95] xl:scale-100 origin-center transition-transform duration-300 shrink-0">
         {/* Deep ambient drop shadow under the platter */}
         <div
           className="absolute -inset-4 rounded-full bg-black/60 blur-2xl pointer-events-none transition-all duration-700"
