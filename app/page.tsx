@@ -224,17 +224,6 @@ export default function SanctuaryPage() {
       {/* LAYER 6: BOTTOM MASTER TRANSPORT DECK & HUD                           */}
       {/* -------------------------------------------------------------------- */}
       <footer className="relative z-20 w-full flex flex-col items-center pb-2 sm:pb-3 md:pb-4 px-0 sm:px-4 shrink-0">
-        {/* Multi-Channel Ambient Soundboard Popover (Desktop / Tablet) */}
-        <AmbientSoundboard
-          isOpen={isSoundboardOpen}
-          onClose={() => setIsSoundboardOpen(false)}
-          ambientVolumes={audio.ambientVolumes}
-          setAmbientVolume={audio.setAmbientVolume}
-          toggleAmbientMute={audio.toggleAmbientMute}
-          isAmbientMuted={audio.isAmbientMuted}
-          onToggleMasterAmbientMute={audio.toggleMasterAmbientMute}
-        />
-
         {/* Tactile Keyboard Shortcuts HUD (Elevated above ScrubBar on Desktop) */}
         <div className="mb-1.5 md:mb-2 hidden sm:block">
           <KeyboardShortcutsHud

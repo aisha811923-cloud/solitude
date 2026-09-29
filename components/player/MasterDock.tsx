@@ -367,9 +367,14 @@ export const MasterDock: React.FC<MasterDockProps> = ({
                 max="1"
                 step="0.01"
                 value={displayVolume}
-                onChange={(e) => onVolumeChange(parseFloat(e.target.value))}
+                onChange={(e) => {
+                  e.stopPropagation();
+                  onVolumeChange(parseFloat(e.target.value));
+                }}
+                onPointerDown={(e) => e.stopPropagation()}
+                onMouseDown={(e) => e.stopPropagation()}
                 aria-label="Volume slider"
-                className="w-full h-1 bg-neutral-800 rounded-full appearance-none cursor-pointer accent-amber-500 focus:outline-none"
+                className="w-full h-1 bg-neutral-800 rounded-full appearance-none cursor-pointer accent-amber-500 focus:outline-none z-10"
               />
             </div>
           </div>

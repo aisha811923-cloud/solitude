@@ -284,11 +284,15 @@ export const MobileControlDrawer: React.FC<MobileControlDrawerProps> = ({
                             max="1"
                             step="0.01"
                             value={isSilenced ? 0 : rawVolume}
-                            onChange={(e) =>
-                              setAmbientVolume(ch.key, parseFloat(e.target.value))
-                            }
+                            onChange={(e) => {
+                              e.stopPropagation();
+                              setAmbientVolume(ch.key, parseFloat(e.target.value));
+                            }}
+                            onPointerDown={(e) => e.stopPropagation()}
+                            onMouseDown={(e) => e.stopPropagation()}
+                            onTouchStart={(e) => e.stopPropagation()}
                             aria-label={`${ch.label} volume slider`}
-                            className="w-full h-2 bg-neutral-900 rounded-full appearance-none cursor-pointer accent-amber-500 focus:outline-none"
+                            className="w-full h-2 bg-neutral-900 rounded-full appearance-none cursor-pointer accent-amber-500 focus:outline-none z-10"
                             style={{
                               background: `linear-gradient(to right, #F59E0B 0%, #F59E0B ${displayPercent}%, #1E293B ${displayPercent}%, #1E293B 100%)`,
                             }}
@@ -402,9 +406,15 @@ export const MobileControlDrawer: React.FC<MobileControlDrawerProps> = ({
                   max="1"
                   step="0.01"
                   value={isMuted ? 0 : volume}
-                  onChange={(e) => onVolumeChange(parseFloat(e.target.value))}
+                  onChange={(e) => {
+                    e.stopPropagation();
+                    onVolumeChange(parseFloat(e.target.value));
+                  }}
+                  onPointerDown={(e) => e.stopPropagation()}
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onTouchStart={(e) => e.stopPropagation()}
                   aria-label="Master track volume slider"
-                  className="w-full h-2 bg-neutral-900 rounded-full appearance-none cursor-pointer accent-amber-500 focus:outline-none"
+                  className="w-full h-2 bg-neutral-900 rounded-full appearance-none cursor-pointer accent-amber-500 focus:outline-none z-10"
                   style={{
                     background: `linear-gradient(to right, #F59E0B 0%, #F59E0B ${
                       isMuted ? 0 : Math.round(volume * 100)

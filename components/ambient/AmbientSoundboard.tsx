@@ -53,14 +53,29 @@ export const AmbientSoundboard: React.FC<AmbientSoundboardProps> = ({
 }) => {
   const panelRef = useRef<HTMLDivElement | null>(null);
 
-  // Close on Escape or click outside
+  // Close on Escape or click outside (robust against detached DOM nodes)
   useEffect(() => {
     if (!isOpen) return;
 
-    const handleClickOutside = (e: MouseEvent) => {
-      if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
-        onClose();
+    const handleClickOutside = (event: MouseEvent | PointerEvent) => {
+      const target = event.target as Node | null;
+      if (!target || !panelRef.current) return;
+
+      // If the target is no longer connected to document, it was unmounted/re-rendered during the click
+      if (target !== document && !document.body.contains(target)) return;
+
+      // Ignore clicks inside the popover
+      if (panelRef.current.contains(target)) return;
+
+      // Ignore clicks on trigger buttons that toggle the soundboard
+      if (
+        (target as Element).closest?.('button[aria-label*="ambient" i]') ||
+        (target as Element).closest?.('button[aria-label*="soundboard" i]')
+      ) {
+        return;
       }
+
+      onClose();
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -69,11 +84,11 @@ export const AmbientSoundboard: React.FC<AmbientSoundboardProps> = ({
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("pointerdown", handleClickOutside);
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("pointerdown", handleClickOutside);
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen, onClose]);
@@ -85,6 +100,9 @@ export const AmbientSoundboard: React.FC<AmbientSoundboardProps> = ({
       ref={panelRef}
       role="dialog"
       aria-label="Ambient soundscape faders"
+      onClick={(e) => e.stopPropagation()}
+      onMouseDown={(e) => e.stopPropagation()}
+      onPointerDown={(e) => e.stopPropagation()}
       className={`absolute bottom-24 sm:bottom-28 right-4 sm:right-auto sm:left-1/2 sm:-translate-x-1/2 w-[92vw] max-w-[340px] sm:max-w-[380px] p-5 rounded-2xl glass-popover z-40 select-none shadow-2xl transition-all duration-300 animate-in fade-in zoom-in-95 ${className}`}
     >
       {/* Header */}
@@ -97,7 +115,12 @@ export const AmbientSoundboard: React.FC<AmbientSoundboardProps> = ({
         </div>
         <button
           type="button"
-          onClick={onClose}
+          onClick={(e) => {
+            e.stopPropagation();
+            onClose();
+          }}
+          onMouseDown={(e) => e.stopPropagation()}
+          onPointerDown={(e) => e.stopPropagation()}
           className="w-7 h-7 rounded-full flex items-center justify-center text-neutral-400 hover:text-white hover:bg-white/10 active:scale-95 transition-all"
           aria-label="Close soundboard"
         >
@@ -123,7 +146,12 @@ export const AmbientSoundboard: React.FC<AmbientSoundboardProps> = ({
           </div>
           <button
             type="button"
-            onClick={onToggleMasterAmbientMute}
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleMasterAmbientMute();
+            }}
+            onMouseDown={(e) => e.stopPropagation()}
+            onPointerDown={(e) => e.stopPropagation()}
             className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-mono transition-all duration-150 active:scale-95 ${
               isAmbientMuted
                 ? "bg-white/[0.04] border-white/10 text-neutral-400 hover:text-white"
@@ -175,7 +203,12 @@ export const AmbientSoundboard: React.FC<AmbientSoundboardProps> = ({
                   </span>
                   <button
                     type="button"
-                    onClick={() => toggleAmbientMute(ch.key)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleAmbientMute(ch.key);
+                    }}
+                    onMouseDown={(e) => e.stopPropagation()}
+                    onPointerDown={(e) => e.stopPropagation()}
                     className="w-6 h-6 rounded flex items-center justify-center text-neutral-400 hover:text-white active:scale-90 transition-all"
                     aria-label={`Toggle mute for ${ch.label}`}
                     title={isMuted ? "Unmute" : "Mute"}
@@ -197,9 +230,14 @@ export const AmbientSoundboard: React.FC<AmbientSoundboardProps> = ({
                   max="1"
                   step="0.01"
                   value={isMuted ? 0 : rawVolume}
-                  onChange={(e) => setAmbientVolume(ch.key, parseFloat(e.target.value))}
+                  onChange={(e) => {
+                    e.stopPropagation();
+                    setAmbientVolume(ch.key, parseFloat(e.target.value));
+                  }}
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onPointerDown={(e) => e.stopPropagation()}
                   aria-label={`${ch.label} volume`}
-                  className="w-full h-1.5 bg-neutral-900 rounded-full appearance-none cursor-pointer accent-amber-500 focus:outline-none"
+                  className="w-full h-1.5 bg-neutral-900 rounded-full appearance-none cursor-pointer accent-amber-500 focus:outline-none z-10"
                   style={{
                     background: `linear-gradient(to right, #F59E0B 0%, #F59E0B ${displayPercent}%, #1E293B ${displayPercent}%, #1E293B 100%)`,
                   }}
